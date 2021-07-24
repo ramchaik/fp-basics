@@ -11,7 +11,8 @@ const allTaskPromise = (allTasks) =>
       task()
         .then(console.log)
         .catch((e) => {
-          throw e;
+          console.log('Error: ', e); // just log, all settled like 
+          // throw e; // like Promise.all 
         })
   );
 
@@ -27,7 +28,7 @@ const promise1 = () => {
 
 const promise2 = () => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => resolve('promise #2 in 1 sec'), 1000);
+    setTimeout(() => reject('promise #2 in 1 sec'), 1000);
   });
 };
 
