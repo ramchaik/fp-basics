@@ -21,18 +21,24 @@ const add = (x, y) => x + y;
 const isEven = (x) => x % 2 === 0;
 const isOdd = (x) => !isEven(x);
 
-function mapping(fn) {
-  return function (rf) {
+function mapping(f) {
+  // This is a transducer
+  // as it takes a reducer and 
+  // returns a reducer
+  return function (step) { // reducing/step/reducer fn
     return (acc, val) => {
-      return rf(acc, fn(val));
+      return step(acc, f(val));
     };
   };
 }
 
-function filtering(p) {
-  return function (rf) {
+function filtering(predicate) {
+  // This is a transducer
+  // as it takes a reducer and 
+  // returns a reducer
+  return function (rf) { // reducing/step/reducer fn
     return (acc, val) => {
-      return p(val) ? rf(acc, val) : acc;
+      return predicate(val) ? rf(acc, val) : acc;
     };
   };
 }
