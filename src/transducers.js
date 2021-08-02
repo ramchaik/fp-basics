@@ -23,9 +23,10 @@ const isOdd = (x) => !isEven(x);
 
 function mapping(f) {
   // This is a transducer
-  // as it takes a reducer and 
+  // as it takes a reducer and
   // returns a reducer
-  return function (step) { // reducing/step/reducer fn
+  return function (step) {
+    // reducing/step/reducer fn
     return (acc, val) => {
       return step(acc, f(val));
     };
@@ -34,9 +35,10 @@ function mapping(f) {
 
 function filtering(predicate) {
   // This is a transducer
-  // as it takes a reducer and 
+  // as it takes a reducer and
   // returns a reducer
-  return function (rf) { // reducing/step/reducer fn
+  return function (rf) {
+    // reducing/step/reducer fn
     return (acc, val) => {
       return predicate(val) ? rf(acc, val) : acc;
     };
@@ -89,6 +91,8 @@ const xform = compose(
 
 const newNums = dataStructure.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 console.log({ transduceCustDS: transduce(xform, add, 0, newNums) });
-console.log({ transduceCustDS: transduce(xform, concat, dataStructure.of(), newNums) });
+console.log({
+  transduceCustDS: transduce(xform, concat, dataStructure.of(), newNums),
+});
 console.log({ transduceOrigDS: transduce(xform, add, 0, nums) });
 console.log({ transduceOrigDS: transduce(xform, concat, [], nums) });
