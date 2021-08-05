@@ -45,8 +45,16 @@ const sumAllJSAdaptaionFP = (arr) => {
   return arr.reduce(sum, 0);
 };
 
+const sumRecursive = ([x = 0, y = 0, ...tail]) => {
+  if (tail.length === 0) {
+    return x + y;
+  }
+  return sumRecursive([sumRecursive([x, y]), sumRecursive(tail)]);
+};
+
 console.log('For: ', sumAllWithFor(nums));
 console.log('While: ', sumAllWithWhile(nums));
 console.log('GOD recursion: ', sumAllRecursive(nums));
 console.log('Above GOD haskell way: ', sumAllHaskellWay(...nums));
 console.log('NANI JS?!!: ', sumAllJSAdaptaionFP(nums));
+console.log('SUMMM : ', sumRecursive(nums));
